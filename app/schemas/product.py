@@ -12,7 +12,14 @@ class ProductBase(BaseModel):
 class ProductCreate(ProductBase):
     pass # Inherits all fields and validations from ProductBase
 
-# 3. Response Schema (Output DTO for GET/Responses)
+# 3. Update Schema (Input DTO for PATCH)
+class ProductUpdate(BaseModel):
+    name: Optional[str] = Field(None, min_length=2, max_length=100)
+    category: Optional[str] = Field(None, min_length=2, max_length=50)
+    price: Optional[float] = Field(None, gt=0)
+    stock: Optional[int] = Field(None, ge=0)
+
+# 4. Response Schema (Output DTO for GET/Responses)
 class ProductResponse(ProductBase):
     id: int # Database auto-incremented primary key
     
