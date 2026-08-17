@@ -13,7 +13,7 @@ class ProductService:
         return self.repository.create(product_data)
         
     def get_product_by_id(self, product_id: int) -> ProductTable:
-        product = self.repository.get_product_by_id(product_id)
+        product = self.repository.get_by_id(product_id)
         if product is None:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,

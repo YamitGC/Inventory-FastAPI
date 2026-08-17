@@ -15,3 +15,11 @@ engine = create_engine(
 # Session maker
 LocalSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# Connection-provisioning function
+def get_db():
+    db = LocalSession()
+    try:
+        yield db
+    finally:
+        db.close()

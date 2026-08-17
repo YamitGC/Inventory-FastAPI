@@ -7,7 +7,7 @@ class ProductTable(Base):
     __tablename__ = "products"
     
     id = Column(Integer, primary_key=True, index=True)
-    titulo = Column(String(100), nullable=False)
-    categoria = Column(String, index=True, nullable=False)
-    precio = Column(Float, nullable=False)
-    unidades = Column(Integer, default=0)
+    name = Column(String(100), nullable=False)
+    category = Column(String, index=True, nullable=False)
+    price = Column(Float, nullable=False)
+    stock = Column(Integer, default=0)

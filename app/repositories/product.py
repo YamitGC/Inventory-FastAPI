@@ -1,6 +1,6 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from app.models import ProductTable
+from app.models.product import ProductTable
 from app.schemas.product import ProductCreate, ProductUpdate
 
 class ProductRepository:
