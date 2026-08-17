@@ -1,28 +1,28 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from app.models import Product
+from app.models import ProductTable
 from app.schemas.product import ProductCreate, ProductUpdate
 
 class ProductRepository:
     def __init__(self, db: Session):
         self.db = db # Database session injection
         
-    def create(self, product_data: ProductCreate) -> Product:
+    def create(self, product_data: ProductCreate) -> ProductTable:
         # Pydantic schema -> SQLAlchemy model
-        db_product = Product(**product_data.model_dump())
+        db_product = ProductTable(**product_data.model_dump())
         # Persist to the database
         self.db.add(db_product)
         self.db.commit()
         self.db.refresh(db_product)  # Gets the ID assigned by SQLite
         return db_product
     
-    def get_by_id(self, product_id: int) -> Product | None:
-        return self.db.query(Product).filter(Product.id == product_id).first()
+    def get_by_id(self, product_id: int) -> ProductTable | None:
+        return self.db.query(ProductTable).filter(ProductTable.id == product_id).first()
     
-    def get_all(self) -> List[Product]:
-        return self.db.query(Product).all()
+    def get_all(self) -> List[ProductTable]:
+        return self.db.query(ProductTable).all()
     
-    def update(self, product_id: int, product_data: ProductUpdate) -> Optional[Product]:
+    def update(self, product_id: int, product_data: ProductUpdate) -> Optional[ProductTable]:
         db_product = self.get_by_id(product_id)
         if not db_product:
             return None
